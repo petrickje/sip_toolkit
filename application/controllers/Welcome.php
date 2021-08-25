@@ -19,13 +19,17 @@ class Welcome extends CI_Controller {
 
 	public function homepage()
 	{
+		$where_toolkit=array(
+			'status' => 'tersedia'
+		);
+		$data['toolkit'] = $this->Data_Toolkit->retrieve_where("toolkit",$where_toolkit)->result();
 		$where = array(
 			'nim' => $_SESSION['nim']
 			);
 		$data['user'] = $this->User->cek_login("user",$where)->result();
 		$this->load->view('user/header');
 		    $this->load->view('user/sidebar', $data);
-            $this->load->view('dashboard',$data);
+            $this->load->view('user/toolkit_tersedia',$data);
             $this->load->view('user/footer');
 	}
 
