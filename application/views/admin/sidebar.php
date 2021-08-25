@@ -46,21 +46,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="<?php echo base_url("Welcome/admin");?>" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Toolkit Tersedia</p>
+                  <p> Seluruh Toolkit</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="<?php echo base_url("Admin/dipinjam");?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Toolkit Dipinjam</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="<?php echo base_url("Admin/tersedia");?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Seluruh Toolkit</p>
+                  <p> Toolkit Tersedia</p>
                 </a>
               </li>
             </ul>
