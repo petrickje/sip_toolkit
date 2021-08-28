@@ -65,52 +65,77 @@ section{
 
     <!-- Main content -->
     <section class="content">
-      <div class="row" >
-        <div class="col-md-6">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Akun</h3>
+      <!-- /.row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Daftar Akun</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <form action="<?php echo base_url('akun/update_akun'); ?>" method="post">
-            <div class="card-body">
-            <div class="form-group">
-            <?php foreach ($user as $row)
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>NIM</th>
+                      <th>Nama</th>
+                      <th>Alamat</th>
+                      <th>No. Handphone</th>
+                      <th><i class="fas fa-history"></i> / <i
+                                class="fas fa-search">
+                            </th>
+                    </tr>
+                   
+                  </thead>
+                  <tbody>
+                  <?php $int_temp = 1;
+                    foreach ($user_all as $row)
                   { ?>
-                <label for="inputClientCompany">NIM</label>
-                <input type="text" name="nim"  id="inputClientCompany" class="form-control" value="<?php echo $access = $row->nim;?>">
+                    <tr>
+                    
+                      <td><?php echo $int_temp;  ?></td>
+                      <td><?php echo $row->nim;?></td>
+                      <td><?php echo $row->nama;?></td>
+                      <td><?php echo $row->alamat;?></td>
+                      <td><?php echo $row->nomor_hp;?></td>
+                      <td class="text-center" style="white-space:" >
+                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button"
+                                            href="goods/edit/{{ $dsd_kdBarang->slug }}"><i
+                                                class="fas fa-history"></i>&nbsp;Edit</a>
+                      <a class="btn btn-danger btn-sm d-none d-sm-inline-block" role="button"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2" href=""><i
+                                                class="fas fa-search"></i>&nbsp;Hapus</a>
+                      </td>
+                      
+                    </tr>
+                    <?php 
+                  $int_temp+=1;
+                  } ?>
+                  </tbody>
+                </table>
               </div>
-              <div class="form-group">
-                <label for="inputClientCompany">Nama</label>
-                <input type="text" name="nama"  id="inputClientCompany" class="form-control" value="<?php echo $access = $row->nama;?>">
-              </div>
-              <div class="form-group">
-                <label for="inputClientCompany">Alamat</label>
-                <input type="text" name="alamat"  id="inputClientCompany" class="form-control" value="<?php echo $access = $row->alamat;?>">
-              </div>
-              <div class="form-group">
-                <label for="inputClientCompany">Nomor Hp</label>
-                <input type="text" name="nomor_hp"  id="inputClientCompany" class="form-control" value="<?php echo $access = $row->nomor_hp;?>">
-              </div>
-              <div class="form-group">
-                <label for="inputClientCompany">Password</label>
-                <input type="password" name="password"  id="inputClientCompany" class="form-control" value="">
-              </div>
-              <?php } ?>
+              <!-- /.card-body -->
             </div>
-            <!-- /.card-body -->
+            <!-- /.card -->
           </div>
-          <div class="row">
-        <div class="col-12">
-          <a href="<?php echo base_url("Welcome/homepage");?>" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Perbarui Data" class="btn btn-success float-right">
         </div>
-      </div>
+        <!-- /.row -->
+
+
+      
     </section>
     <!-- /.content -->
   </div>

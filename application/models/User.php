@@ -8,4 +8,7 @@ class User extends CI_Model{
     function input_user($table,$data){		
 		$this->db->insert($table, $data);
 	}	
+	function retrieve_user($table){		
+		return $this->db->get($table);
+	}	
 }

@@ -83,7 +83,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url('toolkit/kelola_akun');?>" class="nav-link">
+            <a href="<?php echo base_url('akun/update_admin');?>" class="nav-link">
             <i class="fas fa-user-cog"></i>
             
               <p>

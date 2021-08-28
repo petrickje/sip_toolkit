@@ -54,7 +54,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="<?php echo base_url('akun/update');?>" class="nav-link">
             <i class="fas fa-user-cog"></i>
               <p>
                 Perbarui Data
