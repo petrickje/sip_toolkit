@@ -27,7 +27,15 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url('plugins/summernote/summernote-bs4.min.css');?>">
 
+  <style>
   
+section{
+    
+    width: 70%;
+    margin-right:auto;
+    margin-left:auto;
+}
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -177,7 +185,11 @@ window.onclick = function(event) {
     }
 }
 </script>
-
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
 <!-- jQuery -->
 <script src="<?php echo base_url('plugins/jquery/jquery.min.js');?>"></script>
 <!-- jQuery UI 1.11.4 -->

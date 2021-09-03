@@ -108,9 +108,10 @@
               </button>
             </div>
             <div class="modal-body">
-            <form>
+            <form action="<?php echo base_url('toolkit/peminjaman'); ?>" method="post">
                   <div class="form-group">
                     <label for="isi_toolkit">Isi Toolkit</label>
+                    <input type="text" name="id_toolkit" class="form-control" id="isi_toolkit" value="<?php echo $row->id_toolkit;?>" hidden>
                     <input type="text" class="form-control" id="isi_toolkit" value="<?php echo $row->isi_toolkit;?>" disabled>
                   </div>
                   <div class="form-group">
@@ -136,7 +137,7 @@
                 </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <input type="submit" class="btn btn-primary" value="Save changes">
               </form>
             </div>
           </div>
@@ -177,7 +178,11 @@ window.onclick = function(event) {
     }
 }
 </script>
-
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
 <!-- jQuery -->
 <script src="<?php echo base_url('plugins/jquery/jquery.min.js');?>"></script>
 <!-- jQuery UI 1.11.4 -->

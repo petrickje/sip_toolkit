@@ -71,8 +71,7 @@ section{
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Daftar Akun</h3>
-
-                <div class="card-tools">
+                  <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
@@ -94,8 +93,9 @@ section{
                       <th>Nama</th>
                       <th>Alamat</th>
                       <th>No. Handphone</th>
-                      <th><i class="fas fa-history"></i> / <i
-                                class="fas fa-search">
+                      <th class="text-center">
+                      <i class="fas fa-edit"></i> / 
+                      <i class="fas fa-trash-alt"></i>
                             </th>
                     </tr>
                    
@@ -112,12 +112,19 @@ section{
                       <td><?php echo $row->alamat;?></td>
                       <td><?php echo $row->nomor_hp;?></td>
                       <td class="text-center" style="white-space:" >
-                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button"
-                                            href="goods/edit/{{ $dsd_kdBarang->slug }}"><i
-                                                class="fas fa-history"></i>&nbsp;Edit</a>
-                      <a class="btn btn-danger btn-sm d-none d-sm-inline-block" role="button"
-                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2" href=""><i
-                                                class="fas fa-search"></i>&nbsp;Hapus</a>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $row->id_user;?>">
+                      <i class="fas fa-edit"></i>
+                        
+                             Edit
+                            </button>
+
+                            
+                            <a href="<?php echo base_url('admin/delet_akun/'.$row->nim.'');?>" class="btn btn-danger">Hapus
+                            <i class="fas fa-trash-alt"></i>
+                  </a>
+                             
+                            
+                      
                       </td>
                       
                     </tr>
@@ -133,7 +140,65 @@ section{
           </div>
         </div>
         <!-- /.row -->
+<!-- Modal -->
 
+<?php foreach ($user_all as $row)
+                  { ?>
+                      <div class="modal fade" id="exampleModalCenter<?php echo $row->id_user;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLongTitle">Edit Akun</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <form action="<?php echo base_url('admin/edit/'.$row->nim.''); ?>" method="post">
+            <div class="card-body">
+            <div class="form-group">
+            
+                <label for="inputClientCompany">NIM</label>
+                <input type="text" name="nim"  id="inputClientCompany" class="form-control" value="<?php echo $row->nim;?>">
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Nama</label>
+                <input type="text" name="nama"  id="inputClientCompany" class="form-control" value="<?php echo $row->nama;?>">
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Alamat</label>
+                <input type="text" name="alamat"  id="inputClientCompany" class="form-control" value="<?php echo $row->alamat;?>">
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Nomor Hp</label>
+                <input type="text" name="nomor_hp"  id="inputClientCompany" class="form-control" value="<?php echo $row->nomor_hp;?>">
+              </div>
+              <div class="form-group">
+              <label for="cars">Access Level :</label>
+                      <select name="access" >
+                        <option value="2" <?php if($row->access == 2) echo "selected";?>>User</option>
+                        <option value="1" <?php if($row->access == 1) echo "selected";?>>Admin</option>
+                        
+                      </select>
+                      <br><br>
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Password</label>
+                <input type="password" name="password"  id="inputClientCompany" class="form-control" value="">
+              </div>
+              
+            </div>
+                  
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <input type="submit" class="btn btn-primary" value="Save Changes">
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <?php } ?>
 
       
     </section>

@@ -40,7 +40,7 @@ class Welcome extends CI_Controller {
 			);
 		$data['user'] = $this->User->cek_login("user",$where)->result();
 		$data['toolkit'] = $this->Data_Toolkit->retrieve_data("toolkit")->result();
-		$this->load->view('admin/header');
+			$this->load->view('admin/header');
 		    $this->load->view('admin/sidebar', $data);
             $this->load->view('dashboard_admin', $data);
             $this->load->view('admin/footer');

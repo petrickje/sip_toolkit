@@ -26,11 +26,11 @@
   <link rel="stylesheet" href="<?php echo base_url('plugins/daterangepicker/daterangepicker.css');?>">
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url('plugins/summernote/summernote-bs4.min.css');?>">
-<style>
+  <style>
   
 section{
     
-    width: 70%;
+    width: 80%;
     margin-right:auto;
     margin-left:auto;
 }
@@ -110,6 +110,7 @@ section{
           <a href="<?php echo base_url("Welcome/homepage");?>" class="btn btn-secondary">Cancel</a>
           <input type="submit" value="Perbarui Data" class="btn btn-success float-right">
         </div>
+            
       </div>
     </section>
     <!-- /.content -->
@@ -122,7 +123,34 @@ section{
   <!-- /.content-wrapper -->
 
  
+  <script>
 
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("<?php echo $mq_solarium; ?>");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("chiudi_dimensione")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "flex";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->

@@ -36,25 +36,12 @@ class Akun extends CI_Controller {
 		$data['user_all'] = $this->User->retrieve_user("user")->result();
 		$this->load->view('admin/header');
 		$this->load->view('admin/sidebar', $data);
-		$this->load->view('kelola_akun_admin');
+		$this->load->view('kelola_akun_admin',$data);
 		$this->load->view('admin/footer');
 
 	}
 
-	public function update_akun()
-	{
-		$nim= $this->input->post('nim');
-		$where = array(
-			
-			'nama' => $this->input->post('nama'),
-			'alamat' => $this->input->post('alamat'),
-            'nomor_hp' => $this->input->post('nomor_hp'),
-            'password' => md5($this->input->post('password'))
-			);
-		$data['user'] = $this->update_akun->update_user("user",$where,$nim);
-		redirect('Welcome/homepage');
-
-	}
+	
 
 
 }

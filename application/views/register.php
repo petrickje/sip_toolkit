@@ -83,25 +83,16 @@
 							Register
 						</button>
 					</div>
-
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							
-						</span>
-						<a class="txt2" href="#">
+					<div class="text-center p-t-126">
+				<i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
+						<a class="txt2" href="<?php echo base_url('');?>">
+							Login
 							
 						</a>
 					</div>
-
-                    
-
-					<div class="text-center p-t-136">
-						<a class="txt2" href="Welcome/register">
-							
-							
-						</a>
-					</div>
+					
 				</form>
+				
 			</div>
 		</div>
 	</div>

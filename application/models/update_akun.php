@@ -1,6 +1,6 @@
 <?php 
  
-class Update_akun extends CI_Model{	
+class Update_Akun extends CI_Model{	
 
 
 	function input_user($table,$data){		
@@ -16,5 +16,9 @@ class Update_akun extends CI_Model{
     function update_user($table,$where,$nim){		
 		$this->db->where('nim', $nim);
         $this->db->update($table, $where);
+	}
+	function delete($tables,$nim){
+		$this->db->where('nim', $nim);
+		$this->db->delete($tables);
 	}
 }

@@ -9,6 +9,7 @@ class Toolkit extends CI_Controller {
             $this->load->helper('url');
 			$this->load->model('User');
 			$this->load->model('Data_Toolkit');
+
        }
 
 	
@@ -21,6 +22,21 @@ class Toolkit extends CI_Controller {
 		$data['user'] = $this->User->cek_login("user",$where)->result();
 		$this->load->view('admin/header');
 		$this->load->view('admin/sidebar', $data);
+		$this->load->view('pendaftaran_toolkit');
+		$this->load->view('admin/footer');
+
+	}
+	public function peminjaman()
+	{
+		$where = array(
+			'peminjam' => $_SESSION['nim'],
+			'waktu_pinjam' => 'now()',
+			'id_toolkit' => $this->input->post('id_toolkit')
+			);
+		$this->Data_Toolkit->peminjaman("peminjaman",$where);
+		
+		$this->load->view('admin/header');
+		$this->load->view('admin/sidebar');
 		$this->load->view('pendaftaran_toolkit');
 		$this->load->view('admin/footer');
 
