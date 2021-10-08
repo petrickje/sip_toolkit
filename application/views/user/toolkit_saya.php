@@ -53,7 +53,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-              <li class="breadcrumb-item active">Daftar Toolkit</li>
+              <li class="breadcrumb-item active"> Toolkit Saya</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -66,29 +66,84 @@
       <div class="container-fluid">
         
         <!-- Small boxes (Stat box) -->
+       
+
+
         <div class="row">
-        <?php foreach ($toolkit as $row)
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Toolkit Saya</h3>
+                  <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>NIM</th>
+                      <th>Nama</th>
+                      <th>Waktu Pinjam</th>
+                      <th>Alamat</th>
+                      <th>Toolkit</th>
+                      <th class="text-center">
+                      <i class="fas fa-edit"></i> / 
+                      <i class="fas fa-trash-alt"></i>
+                            </th>
+                    </tr>
+                   
+                  </thead>
+                  <tbody>
+                  <?php $int_temp = 1;
+                    foreach ($toolkit as $row)
                   { ?>
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              
-              <div class="inner">
-                <h3>Toolkit</h3>
-                <p>Toolkit <?php echo $row->id_toolkit;?></p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-toolbox"></i>
-              </div>
+                    <tr>
+                    
+                      <td><?php echo $int_temp;  ?></td>
+                      <td><?php echo $row->peminjam;?></td>
+                      <td><?php echo $row->nama;?></td>
+                      <td><?php echo $row->waktu_pinjam;?></td>
+                      <td><?php echo $row->alamat;?></td>
+                      <td><?php echo $row->id_toolkit;?></td>
+                      <td class="text-center" style="white-space:" >
+                      <a href="<?php echo base_url('akun/disetujui/'.$row->id_peminjaman.'');?>" class="btn btn-primary" >
+                      <i class="fas fa-edit"></i>
+                        
+                             Diterima
+                  </a>
 
-              <a href="#toolkit<?php echo $row->id_toolkit;?>" type="button" class="small-box-footer" data-toggle="modal" data-target="#toolkit<?php echo $row->id_toolkit;?>">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            
+                            <a href="<?php echo base_url('akun/kembalikan/'.$row->id_peminjaman.'');?>" class="btn btn-danger">kembalikan
+                            <i class="fas fa-trash-alt"></i>
+                  </a>
+                             
+                            
+                      
+                      </td>
+                      
+                    </tr>
+                    <?php 
+                  $int_temp+=1;
+                  } ?>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
             </div>
+            <!-- /.card -->
           </div>
-          <?php }?>
         </div>
-
-
-
         
         <!-- /.row -->
         <!-- Control Sidebar -->
@@ -97,48 +152,12 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<?php foreach ($toolkit as $row) { ?>
-<div class="modal fade" id="toolkit<?php echo $row->id_toolkit;?>">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title"> Toolkit <?php echo $row->id_toolkit;?></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-            <form action="<?php echo base_url('toolkit/form_peminjaman/' .$row->id_toolkit); ?>" method="post">
-                  <div class="form-group">
-                    <label for="isi_toolkit">Isi Toolkit</label>
-                    <input type="text" name="id_toolkit" class="form-control" id="isi_toolkit" value="<?php echo $row->id_toolkit;?>" hidden>
-                    <input type="text" class="form-control" id="isi_toolkit" value="<?php echo $row->isi_toolkit;?>" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label for="alamat">Alamat</label>
-                    <input type="text" class="form-control" name="alamat"  value="<?php  echo $row->alamat;?>" hidden>
-                    <input type="text" class="form-control" name="alamat"  value="<?php  echo $row->alamat;?>" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label for="peminjam">Pemegang</label>
-                    <input type="text" class="form-control" id="peminjam" value="<?php foreach ($user_toolkit as $row1) { echo $row1->nama;}?>" disabled>
-                    <input type="text" class="form-control" name="pemegang" value="<?php foreach ($user_toolkit as $row1) { echo $row1->id_user;}?>" hidden >
-                    <input type="text" class="form-control" name="nama" value="   <?php foreach ($user as $row){echo $row->nama;}?>" hidden >
-                  </div>
-                  
-                </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <input type="submit" class="btn btn-primary" value="Ajukan Peminjaman">
-              </form>
-            </div>
-          </div>
+
           <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <?php }?>
-     
+       
+
+      
+
       <!-- /.modal -->
 <!-- ./wrapper -->
 

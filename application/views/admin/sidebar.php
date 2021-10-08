@@ -46,7 +46,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url("Welcome/admin");?>" class="nav-link active">
+                <a href="<?php echo base_url("Welcome/admin");?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p> Seluruh Toolkit</p>
                 </a>
@@ -65,7 +65,14 @@
               </li>
             </ul>
           </li>
-          
+          <li class="nav-item">
+            <a href="<?php echo base_url("toolkit/daftar_form_peminjaman");?>" class="nav-link">
+            <i class="fas fa-history"></i>
+              <p>
+                Daftar Form Pengajuan
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
             <i class="fas fa-history"></i>

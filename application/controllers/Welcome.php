@@ -26,7 +26,14 @@ class Welcome extends CI_Controller {
 		$where = array(
 			'nim' => $_SESSION['nim']
 			);
+		$where1 = array(
+			'access' => "1"
+			);
+		
+
+	
 		$data['user'] = $this->User->cek_login("user",$where)->result();
+		$data['user_toolkit'] = $this->User->cek_login("user",$where1)->result();
 		$this->load->view('user/header');
 		    $this->load->view('user/sidebar', $data);
             $this->load->view('user/toolkit_tersedia',$data);

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SIP Toolkit | Pendaftaran Toolkit</title>
+  <title>SIP Toolkit | Kelola Akun</title>
 
  <!-- Google Font: Source Sans Pro -->
  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -51,12 +51,12 @@ section{
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Pendaftaran Toolkit</h1>
+            <h1>Daftar Pengajuan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-              <li class="breadcrumb-item active">Pendaftaran Toolkit</li>
+              <li class="breadcrumb-item active">Daftar Pengajuan</li>
             </ol>
           </div>
         </div>
@@ -65,50 +65,85 @@ section{
 
     <!-- Main content -->
     <section class="content">
-      <div class="row" >
-        <div class="col-md-6">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Toolkit</h3>
+      <!-- /.row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Daftar Pengajuan</h3>
+                  <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>NIM</th>
+                      <th>Nama</th>
+                      <th>Waktu Pinjam</th>
+                      <th>Alamat</th>
+                      <th class="text-center">
+                      <i class="fas fa-edit"></i> / 
+                      <i class="fas fa-trash-alt"></i>
+                            </th>
+                    </tr>
+                   
+                  </thead>
+                  <tbody>
+                  <?php $int_temp = 1;
+                    foreach ($peminjaman as $row)
+                  { ?>
+                    <tr>
+                    
+                      <td><?php echo $int_temp;  ?></td>
+                      <td><?php echo $row->peminjam;?></td>
+                      <td><?php echo $row->nama;?></td>
+                      <td><?php echo $row->waktu_pinjam?></td>
+                      <td><?php echo $row->alamat;?></td>
+                      <td class="text-center" style="white-space:" >
+                      <a href="<?php echo base_url('toolkit/penyetujuan/'.$row->id_peminjaman.'');?>" class="btn btn-primary" >
+                      <i class="fas fa-edit"></i>
+                        
+                             Setujui
+                  </a>
+
+                            
+                            <a href="<?php echo base_url('toolkit/penolakan/'.$row->id_peminjaman.'');?>" class="btn btn-danger">Tolak
+                            <i class="fas fa-trash-alt"></i>
+                  </a>
+                             
+                            
+                      
+                      </td>
+                      
+                    </tr>
+                    <?php 
+                  $int_temp+=1;
+                  } ?>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
             </div>
-            <form action="<?php echo base_url('Toolkit/aksi_tambah'); ?>" method="post">
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputDescription">Isi Toolkit</label>
-                <textarea name="isi_toolkit" id="inputDescription" class="form-control" rows="4"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="inputStatus">Status</label>
-                <select id="status" name="status" class="form-control custom-select">
-                  <option selected disabled>Select one</option>
-                  <option>tersedia</option>
-                  <option>dipinjam</option>
-                  
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputClientCompany">Lokasi Toolkit</label>
-                <input type="text" name="alamat"  id="inputClientCompany" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputProjectLeader">Foto Toolkit</label>
-                <input type="file" name="foto" id="inputProjectLeader" class="form-control">
-              </div>
-            </div>
-            <!-- /.card-body -->
+            <!-- /.card -->
           </div>
-          <div class="row">
-        <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Create new Porject" class="btn btn-success float-right">
         </div>
-      </div>
+        <!-- /.row -->
+<!-- Modal -->
+
+
+      
     </section>
     <!-- /.content -->
   </div>

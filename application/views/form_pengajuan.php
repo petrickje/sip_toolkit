@@ -40,71 +40,80 @@
   
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
+      <!-- /.row -->
         <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>001</h3>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Daftar Akun</h3>
+                  <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
-                <p>Toolkit 1</p>
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="icon">
-              <i class="fas fa-toolbox"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>002<sup style="font-size: 20px"></sup></h3>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>NIM</th>
+                      <th>Nama</th>
+                      <th>Alamat</th>
+                      <th>No. Handphone</th>
+                      <th class="text-center">
+                      <i class="fas fa-edit"></i> / 
+                      <i class="fas fa-trash-alt"></i>
+                            </th>
+                    </tr>
+                   
+                  </thead>
+                  <tbody>
+                  <?php $int_temp = 1;
+                    foreach ($data as $row)
+                  { ?>
+                    <tr>
+                    
+                      <td><?php echo $int_temp;  ?></td>
+                      <td><?php echo $row->nim;?></td>
+                      <td><?php echo $row->nama;?></td>
+                      <td><?php echo $row->alamat;?></td>
+                      <td><?php echo $row->nomor_hp;?></td>
+                      <td class="text-center" style="white-space:" >
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $row->id_user;?>">
+                      <i class="fas fa-edit"></i>
+                        
+                             Edit
+                            </button>
 
-                <p>Toolkit 2</p>
+                            
+                            <a href="<?php echo base_url('admin/delet_akun/'.$row->nim.'');?>" class="btn btn-danger">Hapus
+                            <i class="fas fa-trash-alt"></i>
+                  </a>
+                             
+                            
+                      
+                      </td>
+                      
+                    </tr>
+                    <?php 
+                  $int_temp+=1;
+                  } ?>
+                  </tbody>
+                </table>
               </div>
-              <div class="icon">
-              <i class="fas fa-toolbox"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- /.card-body -->
             </div>
+            <!-- /.card -->
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>003</h3>
-
-                <p>Toolkit 3</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-toolbox"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>004</h3>
-
-                <p>Toolkit 5</p>
-              </div>
-              <div class="icon">
-              <i class="fas fa-toolbox"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
         </div>
-        <!-- /.row -->
         
   
 

@@ -9,6 +9,7 @@ class Akun extends CI_Controller {
             $this->load->helper('url');
 			$this->load->model('User');
 	        $this->load->model('update_akun');
+	        $this->load->model('Data_Toolkit');
        }
 
 	
@@ -41,7 +42,40 @@ class Akun extends CI_Controller {
 
 	}
 
+	public function toolkit_saya()
+	{
+		$nim = $_SESSION['nim'];
+		$where=array(
+			'nim' => $_SESSION['nim']
+		);
+		$where1=array(
+			'peminjam' => $_SESSION['nim']
+		);
+
+		$data['toolkit'] = $this->Data_Toolkit->toolkit_saya("peminjaman", $where1)->result();
 	
+		$data['user'] = $this->User->cek_login("user",$where)->result();
+
+		
+		$this->load->view('user/header');
+		    $this->load->view('user/sidebar', $data);
+            $this->load->view('user/toolkit_saya',$data);
+            $this->load->view('user/footer');
+	}
+	public function disetujui()
+	{
+		$id_peminjaman = $this->uri->segment(3, 0);
+	 $where = array(
+		 'status'=> 3
+		 
+	 );
+	 $this->Data_Toolkit->update_toolkit("peminjaman",$where, $id_peminjaman);
+	  
+	 
+
+		
+		redirect('akun/toolkit_saya');
+	}
 
 
 }

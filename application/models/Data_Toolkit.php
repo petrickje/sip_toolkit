@@ -17,4 +17,18 @@ class Data_Toolkit extends CI_Model{
 	function peminjaman($table,$data){		
 		$this->db->insert($table, $data);
 	}	
+	function update_toolkit($table, $data, $id_peminjaman){
+		$this->db->where('id_peminjaman', $id_peminjaman);
+		$this->db->update($table, $data);
+		
+	}
+	function toolkit_saya($table,$where1){		
+		return $this->db->get_where($table,$where1);
+		
+
+	}	
+	function toolkit_update($table,$setuju,$id_toolkit){
+		$this->db->where('id_toolkit', $id_toolkit);
+		$this->db->update($table, $setuju);
+	}
 }
