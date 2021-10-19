@@ -129,7 +129,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active"> Toolkit Saya</li>
+                <li class="breadcrumb-item active"> Riwayat Peminjaman</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -149,7 +149,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Toolkit Saya</h3>
+                  <h3 class="card-title">Riwayat Peminjaman</h3>
                   <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                       <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -183,7 +183,7 @@
                     </thead>
                     <tbody>
                       <?php $int_temp = 1;
-                      foreach ($toolkit as $row) { ?>
+                      foreach ($peminjaman as $row) { ?>
                         <tr>
 
                           <td><?php echo $int_temp;  ?></td>
