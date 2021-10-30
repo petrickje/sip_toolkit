@@ -47,14 +47,21 @@ class Akun extends CI_Controller
 		$where = array(
 			'nim' => $_SESSION['nim']
 		);
+		$data['user'] = $this->User->cek_login("user", $where)->result();
 		$where1 = array(
-			'peminjam' => $_SESSION['nim']
+			'id_peminjam' => $_SESSION['nim']
 		);
 
-		$data['toolkit'] = $this->Data_Toolkit->toolkit_saya("peminjaman", $where1)->result();
+		$data['toolkit'] = $this->Data_Toolkit->daftar_peminjaman("peminjaman", $where1)->result();
 
-		$data['user'] = $this->User->cek_login("user", $where)->result();
 
+
+		$where2 = array(
+			'id_pemegang' => $_SESSION['nim'],
+			'status ' => '1'
+		);
+
+		$data['peminjaman'] = $this->Data_Toolkit->daftar_peminjaman("peminjaman", $where2)->result();
 
 		$this->load->view('user/header');
 		$this->load->view('user/sidebar', $data);
@@ -65,29 +72,44 @@ class Akun extends CI_Controller
 	{
 		$id_peminjaman = $this->uri->segment(3, 0);
 		$where = array(
-			'status' => 3
+			'status' => 3,
 
 		);
 		$this->Data_Toolkit->update_toolkit("peminjaman", $where, $id_peminjaman);
-
-
-
-
+		$where = array(
+			'id_pemegang' => $_SESSION['nim'],
+		);
+		$id_toolkit = $this->input->post('id_toolkit');
+		$this->Data_Toolkit->toolkit_update("toolkit", $where, $id_toolkit);
 		redirect('akun/toolkit_saya');
 	}
 
 	public function dikembalikan()
 	{
+
 		$id_peminjaman = $this->uri->segment(3, 0);
 		$where = array(
-			'status' => 4
+			'status' => 4,
+			'resi_pengembalian' => $this->input->post('resi')
+		);
+		$this->Data_Toolkit->update_toolkit("peminjaman", $id_peminjaman, $where);
+		redirect('akun/toolkit_saya');
+	}
 
+	public function diselesaikan()
+	{
+		$id_peminjaman = $this->uri->segment(3, 0);
+		$where = array(
+			'status' => 5
 		);
 		$this->Data_Toolkit->update_toolkit("peminjaman", $where, $id_peminjaman);
 
 
-
-
+		$where1 = array(
+			'status' => 1,
+		);
+		$id_toolkit = $this->input->post('id_toolkit');
+		$this->Data_Toolkit->toolkit_update("toolkit", $where1, $id_toolkit);
 		redirect('akun/toolkit_saya');
 	}
 }

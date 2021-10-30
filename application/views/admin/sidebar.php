@@ -51,7 +51,7 @@
              <li class="nav-item">
                <a href="<?php echo base_url("Admin/dipinjam"); ?>" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Toolkit Dipinjam</p>
+                 <p> Toolkit Dipinjam</p>
                </a>
              </li>
              <li class="nav-item">
@@ -64,7 +64,7 @@
          </li>
          <li class="nav-item">
            <a href="<?php echo base_url("toolkit/daftar_form_peminjaman"); ?>" class="nav-link">
-             <i class="fas fa-history"></i>
+             <i class="fas fa-clipboard-list"></i>
              <p>
                Daftar Form Pengajuan
              </p>

@@ -16,28 +16,31 @@ class Admin extends CI_Controller
 
 	public function tersedia()
 	{
-		$where_toolkit = array(
-			'status' => 'tersedia'
-		);
+
 		$where_user = array(
 			'nim' => $_SESSION['nim']
 		);
 		$data['user'] = $this->User->cek_login("user", $where_user)->result();
-		$data['toolkit'] = $this->Data_Toolkit->retrieve_where("toolkit", $where_toolkit)->result();
+		$where_toolkit = array(
+			'status' => '1'
+		);
+		$data['toolkit'] = $this->Data_Toolkit->toolkit_tersedia("toolkit", $where_toolkit)->result();
+		// $data['toolkit'] = $this->Data_Toolkit->retrieve_where("toolkit", $where_toolkit)->result();
 		$this->load->view('admin/sidebar', $data);
-		$this->load->view('user/toolkit_tersedia', $data);
+		$this->load->view('toolkit_tersediaa');
 		$this->load->view('admin/footer');
 	}
 	public function dipinjam()
 	{
-		$where_toolkit = array(
-			'status' => 'dipinjam'
-		);
+
 		$where_user = array(
 			'nim' => $_SESSION['nim']
 		);
 		$data['user'] = $this->User->cek_login("user", $where_user)->result();
-		$data['toolkit'] = $this->Data_Toolkit->retrieve_where("toolkit", $where_toolkit)->result();
+		$where_toolkit = array(
+			'status' => '2'
+		);
+		$data['toolkit'] = $this->Data_Toolkit->toolkit_tersedia("toolkit", $where_toolkit)->result();
 
 		$this->load->view('admin/sidebar', $data);
 		$this->load->view('toolkit_dipinjam', $data);
@@ -83,12 +86,24 @@ class Admin extends CI_Controller
 	}
 	public function riwayat_peminjaman()
 	{
-		$nim = $this->uri->segment(3, 0);
-		$where = array('nim' => $_SESSION['nim']);
+
+
+
+		$where = array(
+			'nim' => $_SESSION['nim']
+		);
 		$data['user'] = $this->User->cek_login("user", $where)->result();
-		$data['peminjaman'] = $this->Data_Toolkit->R_peminjaman("peminjaman",)->result();
+		$where1 = array(
+			'status' => 5
+		);
+
+		$data['riwayat'] = $this->Data_Toolkit->riwayat_peminjaman("peminjaman", $where1)->result();
+
+
+
+		$this->load->view('admin/header');
 		$this->load->view('admin/sidebar', $data);
-		$this->load->view('riwayat_peminjaman', $data);
+		$this->load->view('riwayat_peminjaman', $data,);
 		$this->load->view('admin/footer');
 	}
 }

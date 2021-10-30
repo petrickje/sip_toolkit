@@ -167,31 +167,32 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <th>No</th>
-                        <th>NIM</th>
-                        <th>Nama</th>
+                        <th>ID Toolkit</th>
+                        <th>ID Pemegang</th>
+                        <th>ID Peminjam</th>
+                        <th>Nama Peminjam</th>
                         <th>Waktu Pinjam</th>
+                        <th>Waktu Kembali</th>
                         <th>Alamat</th>
-                        <th>Toolkit</th>
+                        <th>Nomor HP</th>
                         <th class="text-center">Tracking</th>
-                        <th class="text-center">
-                          <i class="fas fa-edit"></i> /
-                          <i class="fas fa-paper-plane"></i>
-                        </th>
+
                       </tr>
 
                     </thead>
                     <tbody>
-                      <?php $int_temp = 1;
-                      foreach ($peminjaman as $row) { ?>
+                      <?php
+                      foreach ($riwayat as $row) { ?>
                         <tr>
 
-                          <td><?php echo $int_temp;  ?></td>
-                          <td><?php echo $row->peminjam; ?></td>
+                          <td><?php echo $row->id_toolkit;  ?></td>
+                          <td><?php echo $row->id_pemegang; ?></td>
+                          <td><?php echo $row->id_peminjam; ?></td>
                           <td><?php echo $row->nama; ?></td>
-                          <td><?php echo $row->waktu_pinjam; ?></td>
+                          <td><?php echo $row->waktu_pinjam ?></td>
+                          <td><?php echo $row->waktu_kembali ?></td>
                           <td><?php echo $row->alamat; ?></td>
-                          <td><?php echo $row->id_toolkit; ?></td>
+                          <td><?php echo $row->nomor_hp; ?></td>
                           <td>
                             <ul class='progressbar' style="overflow:hidden; white-space:nowrap">
                               <?php
@@ -223,86 +224,17 @@
 
                             </ul>
                           </td>
-                          <td class="text-center" style="white-space:">
-                            <a href="#toolkit<?php echo $row->id_toolkit; ?>" data-toggle="modal" data-target="#toolkit<?php echo $row->id_toolkit; ?>" class="btn btn-primary <?php if ($row->status != 2) {
-                                                                                                                                                                                  echo 'disabled';
-                                                                                                                                                                                } ?>">
-                              <i class="fas fa-edit"></i>
-
-                              Diterima
-                            </a>
 
 
-                            <a href="#toolkitKembalikan<?php echo $row->id_toolkit; ?>" data-toggle="modal" data-target="#toolkitKembalikan<?php echo $row->id_toolkit; ?>" class="btn btn-success <?php $x = $row->status;
-                                                                                                                                                                                                    if ($x != 3) {
-                                                                                                                                                                                                      echo 'disabled';
-                                                                                                                                                                                                    } ?>">kembalikan
-                              <i class="fas fa-paper-plane"></i>
-                            </a>
-
-                            <!-- <a href="<?php echo base_url('akun/dikembalikan/' . $row->id_peminjaman . ''); ?>" class="btn btn-success <?php $x = $row->status;
-                                                                                                                                            if ($x != 3) {
-                                                                                                                                              echo 'disabled';
-                                                                                                                                            } ?>">kembalikan
-                              <i class="fas fa-paper-plane"></i>
-                            </a>
- -->
 
 
-                          </td>
 
                         </tr>
                       <?php
-                        $int_temp += 1;
+
                       } ?>
 
-                      <?php foreach ($toolkit as $row) { ?>
-                        <div class="modal fade" id="toolkit<?php echo $row->id_toolkit; ?>">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="modal-title">Notifikasi</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <form action="<?php echo base_url('akun/disetujui/' . $row->id_peminjaman . ''); ?>" method="post">
-                                  <p>Apakah anda yakin untuk mengubah status Toolkit menjadi diterima?</p>
-                              </div>
-                              <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary"> Diterima </button>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      <?php } ?>
 
-                      <?php foreach ($toolkit as $row) { ?>
-                        <div class="modal fade" id="toolkitKembalikan<?php echo $row->id_toolkit; ?>">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="modal-title">Notifikasi</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <form action="<?php echo base_url('akun/dikembalikan/' . $row->id_peminjaman . ''); ?>" method="post">
-                                  <p>Apakah anda yakin untuk mengembalikan Toolkit?</p>
-                              </div>
-                              <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary"> Kembalikan </button>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      <?php } ?>
 
                     </tbody>
                   </table>

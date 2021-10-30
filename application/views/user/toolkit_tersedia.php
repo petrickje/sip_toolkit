@@ -110,27 +110,26 @@
                 <div class="modal-body">
                   <form action="<?php echo base_url('toolkit/form_peminjaman/' . $row->id_toolkit); ?>" method="post">
                     <div class="form-group">
-                      <label for="isi_toolkit">Isi Toolkit</label>
-                      <input type="text" name="id_toolkit" class="form-control" id="isi_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
-                      <input type="text" class="form-control" id="isi_toolkit" value="<?php echo $row->isi_toolkit; ?>" disabled>
+                      <label for="peminjam">Pemegang</label>
+                      <input type="text" name="id_pemegang" class="form-control" id="id_pemegang" value="<?php echo $row->id_pemegang; ?>" hidden>
+                      <input type="text" class="form-control" id="pemegang" value="<?php echo $row->nama; ?>" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="alamat">Kontak Pemegang</label>
+                      <input type="text" class="form-control" name="nomor_hp" value="<?php echo $row->nomor_hp; ?>" readonly>
                     </div>
                     <div class="form-group">
                       <label for="alamat">Alamat</label>
-                      <input type="text" class="form-control" name="alamat" value="<?php echo $row->alamat; ?>" hidden>
-                      <input type="text" class="form-control" name="alamat" value="<?php echo $row->alamat; ?>" disabled>
+                      <input type="text" class="form-control" name="alamat" value="<?php echo $row->alamat; ?>" readonly>
                     </div>
                     <div class="form-group">
-                      <label for="peminjam">Pemegang</label>
-                      <input type="text" class="form-control" id="peminjam" value="<?php foreach ($user_toolkit as $row1) {
-                                                                                      echo $row1->nama;
-                                                                                    } ?>" disabled>
-                      <input type="text" class="form-control" name="pemegang" value="<?php foreach ($user_toolkit as $row1) {
-                                                                                        echo $row1->id_user;
-                                                                                      } ?>" hidden>
-                      <input type="text" class="form-control" name="nama" value="   <?php foreach ($user as $row) {
-                                                                                      echo $row->nama;
-                                                                                    } ?>" hidden>
+                      <label for="isi_toolkit">Isi Toolkit</label>
+                      <textarea class="form-control" id="isi_toolkit" readonly><?php echo $row->isi_toolkit; ?></textarea>
                     </div>
+                    <input type="text" class="form-control" name="nim" value="<?php foreach ($user as $row) {
+                                                                                echo $row->nim;
+                                                                              } ?>" hidden>
+
 
                 </div>
                 <div class="modal-footer justify-content-between">

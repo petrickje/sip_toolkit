@@ -29,7 +29,7 @@
   <style>
     section {
 
-      width: 70%;
+      width: 100%;
       margin-right: auto;
       margin-left: auto;
     }
@@ -163,11 +163,12 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>No</th>
+                      <th>ID Toolkit</th>
                       <th>NIM</th>
-                      <th>Nama</th>
+                      <th>Nama Peminjam</th>
                       <th>Waktu Pinjam</th>
-                      <th>Alamat</th>
+                      <th>Alamat Peminjam</th>
+                      <th>Nomor Hp</th>
                       <th class="text-center">Tracking</th>
                       <th class="text-center">
                         <i class="fas fa-edit"></i> /
@@ -177,15 +178,16 @@
 
                   </thead>
                   <tbody>
-                    <?php $int_temp = 1;
+                    <?php
                     foreach ($peminjaman as $row) { ?>
                       <tr>
 
-                        <td><?php echo $int_temp;  ?></td>
-                        <td><?php echo $row->peminjam; ?></td>
+                        <td><?php echo $row->id_toolkit;  ?></td>
+                        <td><?php echo $row->id_peminjam; ?></td>
                         <td><?php echo $row->nama; ?></td>
                         <td><?php echo $row->waktu_pinjam ?></td>
                         <td><?php echo $row->alamat; ?></td>
+                        <td><?php echo $row->nomor_hp; ?></td>
                         <td>
                           <ul class='progressbar' style="overflow:hidden; white-space:nowrap">
                             <?php
@@ -235,7 +237,7 @@
 
                       </tr>
                     <?php
-                      $int_temp += 1;
+
                     } ?>
                   </tbody>
                 </table>
@@ -268,11 +270,12 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>No</th>
+                      <th>ID Toolkit</th>
                       <th>NIM</th>
                       <th>Nama</th>
                       <th>Waktu Pinjam</th>
                       <th>Alamat</th>
+                      <th>Nomor HP</th>
                       <th class="text-center">Tracking</th>
                       <th class="text-center">
                         <i class="fas fa-edit"></i> /
@@ -282,15 +285,16 @@
 
                   </thead>
                   <tbody>
-                    <?php $int_temp = 1;
+                    <?php
                     foreach ($selesai as $row) { ?>
                       <tr>
 
-                        <td><?php echo $int_temp;  ?></td>
-                        <td><?php echo $row->peminjam; ?></td>
+                        <td><?php echo $row->id_toolkit;  ?></td>
+                        <td><?php echo $row->id_peminjam; ?></td>
                         <td><?php echo $row->nama; ?></td>
                         <td><?php echo $row->waktu_pinjam ?></td>
                         <td><?php echo $row->alamat; ?></td>
+                        <td><?php echo $row->nomor_hp; ?></td>
                         <td>
                           <ul class='progressbar' style="overflow:hidden; white-space:nowrap">
                             <?php
@@ -338,7 +342,7 @@
 
                       </tr>
                     <?php
-                      $int_temp += 1;
+
                     } ?>
                   </tbody>
                 </table>
@@ -374,17 +378,24 @@
           </div>
           <div class="modal-body">
             <form action="<?php echo base_url('toolkit/penyetujuan/' . $row->id_peminjaman . ''); ?>" method="post">
-              <p>Apakah anda yakin untuk Mengirimkan Toolkit?</p>
+              <input type="text" name="id_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
+              <p>Masukkan Data Resi Pengiriman</p>
+              <input type="text" class="form-control" name="resi" id="resi" value="" required>
           </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary"> Kirimkan </button>
+            <button type="submit" class="btn btn-primary"> Konfirmasi Pengiriman </button>
             </form>
           </div>
         </div>
       </div>
     </div>
   <?php } ?>
+
+
+
+
+
   <?php foreach ($peminjaman as $row) { ?>
     <div class="modal fade" id="toolkitTolak<?php echo $row->id_peminjaman; ?>">
       <div class="modal-dialog">
@@ -397,6 +408,7 @@
           </div>
           <div class="modal-body">
             <form action="<?php echo base_url('toolkit/penolakan/' . $row->id_peminjaman . ''); ?>" method="post">
+              <input type="text" name="id_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
               <p>Apakah anda yakin untuk Menolak Peminjaman?</p>
           </div>
           <div class="modal-footer justify-content-between">
@@ -408,6 +420,9 @@
       </div>
     </div>
   <?php } ?>
+
+
+
   <?php foreach ($selesai as $row) { ?>
     <div class="modal fade" id="toolkitSelesai<?php echo $row->id_peminjaman; ?>">
       <div class="modal-dialog">
@@ -420,11 +435,15 @@
           </div>
           <div class="modal-body">
             <form action="<?php echo base_url('toolkit/selesai/' . $row->id_peminjaman . ''); ?>" method="post">
+              <input type="text" name="id_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
+              <label for="peminjam">Nomor Resi Pengiriman</label>
+              <input type="text" name="id_toolkit" class="form-control" id="id_toolkit" value="<?php echo $row->id_toolkit; ?> " hidden>
+              <input type="text" class="form-control" id="resi" value="<?php echo $row->resi_peminjaman; ?>" readonly>
               <p>Apakah anda yakin untuk Menyelesaikan Peminjaman?</p>
           </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary"> Tolak </button>
+            <button type="submit" class="btn btn-primary"> Konfirmasi </button>
             </form>
           </div>
         </div>
