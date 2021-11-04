@@ -380,7 +380,7 @@
             <form action="<?php echo base_url('toolkit/penyetujuan/' . $row->id_peminjaman . ''); ?>" method="post">
               <input type="text" name="id_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
               <p>Masukkan Data Resi Pengiriman</p>
-              <input type="text" class="form-control" name="resi" id="resi" value="" required>
+              <input type="text" class="form-control" name="resi" value="" required>
           </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

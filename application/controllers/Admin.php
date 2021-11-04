@@ -65,6 +65,44 @@ class Admin extends CI_Controller
 		$this->load->view('kelola_akun_admin', $data);
 		$this->load->view('admin/footer');
 	}
+	public function edit_toolkit()
+	{
+
+		$where = array('nim' => $_SESSION['nim']);
+		$data['user'] = $this->User->cek_login("user", $where)->result();
+		$id_toolkit = $this->uri->segment(3, 0);
+		$data = array(
+
+			'id_pemegang' => $this->input->post('id_pemegang'),
+			'isi_toolkit' => $this->input->post('isi_toolkit'),
+			'status' => $this->input->post('status'),
+		);
+
+		$this->Data_Toolkit->toolkit_update("toolkit", $data, $id_toolkit);
+
+
+		redirect('admin/update_toolkit');
+	}
+	public function update_toolkit()
+	{
+		$where_toolkit = array();
+		$where = array(
+			'nim' => $_SESSION['nim']
+		);
+		$data['user'] = $this->User->cek_login("user", $where)->result();
+
+		$data['toolkit'] = $this->Data_Toolkit->toolkit_tersedia("toolkit", $where_toolkit)->result();
+
+
+
+
+
+		$this->load->view('admin/header');
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('kelola_toolkit_admin', $data);
+		$this->load->view('admin/footer');
+	}
+
 	public function update_admin()
 	{
 		$where = array(
@@ -84,6 +122,13 @@ class Admin extends CI_Controller
 		$this->Update_Akun->delete('user', $nim);
 		$this->update_admin();
 	}
+	public function delet_toolkit()
+	{
+		$id_toolkit = $this->uri->segment(3, 0);
+		$this->Data_Toolkit->delete_toolkit('toolkit', $id_toolkit);
+		$this->update_toolkit();
+		redirect('admin/update_toolkit');
+	}
 	public function riwayat_peminjaman()
 	{
 
@@ -93,11 +138,8 @@ class Admin extends CI_Controller
 			'nim' => $_SESSION['nim']
 		);
 		$data['user'] = $this->User->cek_login("user", $where)->result();
-		$where1 = array(
-			'status' => 5
-		);
 
-		$data['riwayat'] = $this->Data_Toolkit->riwayat_peminjaman("peminjaman", $where1)->result();
+		$data['riwayat'] = $this->Data_Toolkit->riwayat_peminjaman_all("peminjaman")->result();
 
 
 

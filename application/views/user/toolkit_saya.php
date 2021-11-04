@@ -301,7 +301,7 @@
                                 <input type="text" name="id_toolkit" class="form-control" id="id_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
                                 <form action="<?php echo base_url('akun/dikembalikan/' . $row->id_peminjaman . ''); ?>" method="post">
                                   <p>Apakah anda yakin untuk mengembalikan Toolkit pada Admin?</p>
-                                  <input type="text" class="form-control" name="resi" id="resi" value="" required>
+                                  <input type="text" class="form-control" name="resikembali" id="resikembali" value="" required>
                               </div>
                               <div class="modal-footer justify-content-between">
 
@@ -395,31 +395,67 @@
                     </tbody>
                   </table>
                 </div>
-                <?php foreach ($peminjaman as $row) { ?>
-                  <div class="modal fade" id="toolkitKirimu<?php echo $row->id_peminjaman; ?>">
+                <?php foreach ($peminjaman as $row0) { ?>
+                  <div class="modal fade" id="toolkitKirimuu<?php echo $row0->id_peminjaman; ?>">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h4 class="modal-title">Notifikasi</h4>
+                          <h4 class="modal-title">Setujui Permintaan</h4>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
-                        <div class="modal-body">
-                          <form action="<?php echo base_url('toolkit/penyetujuanu/' . $row->id_peminjaman . ''); ?>" method="post">
-                            <input type="text" name="id_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
+
+                        <form action="<?php echo base_url('toolkit/penyetujuanuu/' . $row0->id_peminjaman . ''); ?>" method="post">
+                          <div class="modal-body">
+                            <input type="text" name="id_toolkit" value="<?php echo $row0->id_toolkit; ?>" hidden>
+
                             <p>Masukkan Data Resi Pengiriman</p>
                             <input type="text" class="form-control" name="resi" id="resi" value="" required>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary"> Konfirmasi Pengiriman </button>
-                          </form>
-                        </div>
+                          </div>
+                          <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary"> Konfirmasi </button>
+                          </div>
+
+                        </form>
                       </div>
                     </div>
                   </div>
+
+
                 <?php } ?>
+                <?php foreach ($peminjaman as $row0) { ?>
+                  <div class="modal fade" id="toolkitKirimu<?php echo $row0->id_peminjaman; ?>">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Setujui Permintaan</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <form action="<?php echo base_url('toolkit/penyetujuanuu/' . $row0->id_peminjaman . ''); ?>" method="post">
+                          <div class="modal-body">
+                            <input type="text" name="id_toolkit" value="<?php echo $row0->id_toolkit; ?>" hidden>
+
+                            <p>Masukkan Data Resi Pengiriman</p>
+                            <input type="text" class="form-control" name="resi" id="resi" value="" required>
+                          </div>
+                          <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary"> Konfirmasi </button>
+                          </div>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+
+                <?php } ?>
+
 
                 <?php foreach ($peminjaman as $row0) { ?>
                   <div class="modal fade" id="toolkitTolaku<?php echo $row0->id_peminjaman; ?>">

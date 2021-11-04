@@ -56,7 +56,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active">Kelola Akun</li>
+                <li class="breadcrumb-item active">Update Toolkit Akun</li>
               </ol>
             </div>
           </div>
@@ -70,7 +70,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Daftar Akun</h3>
+                <h3 class="card-title">Update Toolkit</h3>
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -88,38 +88,38 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>No</th>
-                      <th>NIM</th>
-                      <th>Nama</th>
-                      <th>Alamat</th>
-                      <th>No. Handphone</th>
-                      <th class="text-center">
-                        <i class="fas fa-edit"></i> /
-                        <i class="fas fa-trash-alt"></i>
-                      </th>
+                      <th>ID Toolkit</th>
+                      <th>ID Pemegang</th>
+                      <th>Status</th>
+                      <th>Isi Toolkit</th>
+
+
                     </tr>
 
                   </thead>
                   <tbody>
-                    <?php $int_temp = 1;
-                    foreach ($user_all as $row) { ?>
+                    <?php
+                    foreach ($toolkit as $row) { ?>
                       <tr>
 
-                        <td><?php echo $int_temp;  ?></td>
-                        <td><?php echo $row->nim; ?></td>
-                        <td><?php echo $row->nama; ?></td>
-                        <td><?php echo $row->alamat; ?></td>
-                        <td><?php echo $row->nomor_hp; ?></td>
+
+                        <td><?php echo $row->id_toolkit; ?></td>
+                        <td><?php echo $row->id_pemegang; ?></td>
+                        <td><?php
+                            $ket = $row->status;
+                            if ($ket == 1) {
+                              echo 'Tersedia';
+                            } else echo 'Dipinjam' ?></td>
+                        <td><?php echo $row->isi_toolkit; ?></td>
                         <td class="text-center" style="white-space:">
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $row->id_user; ?>">
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $row->id_toolkit; ?>">
                             <i class="fas fa-edit"></i>
 
                             Edit
                           </button>
 
 
-
-                          <a href="#akunhapus<?php echo $row->nim; ?>" data-toggle="modal" data-target="#akunhapus<?php echo $row->nim; ?>" class="btn btn-danger">Hapus
+                          <a href="#toolkithapus<?php echo $row->id_toolkit; ?>" data-toggle="modal" data-target="#toolkithapus<?php echo $row->id_toolkit; ?>" class="btn btn-danger">Hapus
                             <i class="fas fa-user-times"></i>
                           </a>
 
@@ -129,7 +129,7 @@
 
                       </tr>
                     <?php
-                      $int_temp += 1;
+
                     } ?>
                   </tbody>
                 </table>
@@ -142,8 +142,9 @@
         <!-- /.row -->
         <!-- Modal -->
 
-        <?php foreach ($user_all as $row) { ?>
-          <div class="modal fade" id="akunhapus<?php echo $row->nim; ?>">
+
+        <?php foreach ($toolkit as $row) { ?>
+          <div class="modal fade" id="toolkithapus<?php echo $row->id_toolkit; ?>">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -153,9 +154,9 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="<?php echo base_url('admin/delet_akun/' . $row->nim . ''); ?>" method="post">
-                    <input type="text" name="nim" value="<?php echo $row->nim; ?>" hidden>
-                    <p>Apakah anda yakin untuk menghapus Akun?</p>
+                  <form action="<?php echo base_url('admin/delet_toolkit/' . $row->id_toolkit . ''); ?>" method="post">
+                    <input type="text" name="id_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
+                    <p>Apakah anda yakin untuk menghapus Toolkit?</p>
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -167,50 +168,43 @@
           </div>
         <?php } ?>
 
-
-        <?php foreach ($user_all as $row) { ?>
-          <div class="modal fade" id="exampleModalCenter<?php echo $row->id_user; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <?php foreach ($toolkit as $row) { ?>
+          <div class="modal fade" id="exampleModalCenter<?php echo $row->id_toolkit; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Edit Akun</h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle">Edit Toolkit</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="<?php echo base_url('admin/edit/' . $row->nim . ''); ?>" method="post">
+                  <form action="<?php echo base_url('admin/edit_toolkit/' . $row->id_toolkit . ''); ?>" method="post">
                     <div class="card-body">
                       <div class="form-group">
 
-                        <label for="inputClientCompany">NIM</label>
-                        <input type="text" name="nim" id="inputClientCompany" class="form-control" value="<?php echo $row->nim; ?>">
+                        <label for="inputClientCompany">Id Toolkit</label>
+                        <input type="text" name="id_toolkit" id="inputClientCompany" class="form-control" value="<?php echo $row->id_toolkit; ?>">
                       </div>
                       <div class="form-group">
-                        <label for="inputClientCompany">Nama</label>
-                        <input type="text" name="nama" id="inputClientCompany" class="form-control" value="<?php echo $row->nama; ?>">
+                        <label for="inputClientCompany">Id Pemegang</label>
+                        <input type="text" name="id_pemegang" id="inputClientCompany" class="form-control" value="<?php echo $row->id_pemegang; ?>">
                       </div>
                       <div class="form-group">
-                        <label for="inputClientCompany">Alamat</label>
-                        <input type="text" name="alamat" id="inputClientCompany" class="form-control" value="<?php echo $row->alamat; ?>">
+                        <label for="inputClientCompany">Isi Toolkit</label>
+                        <input type="text" name="isi_toolkit" id="inputClientCompany" class="form-control" value="<?php echo $row->isi_toolkit; ?>">
                       </div>
+
                       <div class="form-group">
-                        <label for="inputClientCompany">Nomor Hp</label>
-                        <input type="text" name="nomor_hp" id="inputClientCompany" class="form-control" value="<?php echo $row->nomor_hp; ?>">
-                      </div>
-                      <div class="form-group">
-                        <label for="cars">Access Level :</label>
-                        <select name="access">
-                          <option value="2" <?php if ($row->access == 2) echo "selected"; ?>>User</option>
-                          <option value="1" <?php if ($row->access == 1) echo "selected"; ?>>Admin</option>
+                        <label for="cars">Status :</label>
+                        <select name="status">
+                          <option value="2" <?php if ($row->status == 2) echo "selected"; ?>>Dipinjam</option>
+                          <option value="1" <?php if ($row->status == 1) echo "selected"; ?>>Tersedia</option>
 
                         </select>
                         <br><br>
                       </div>
-                      <div class="form-group">
-                        <label for="inputClientCompany">Password</label>
-                        <input type="password" name="password" id="inputClientCompany" class="form-control" value="">
-                      </div>
+
 
                     </div>
 

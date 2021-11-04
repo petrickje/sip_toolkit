@@ -90,9 +90,9 @@ class Akun extends CI_Controller
 		$id_peminjaman = $this->uri->segment(3, 0);
 		$where = array(
 			'status' => 4,
-			'resi_pengembalian' => $this->input->post('resi')
+			'resi_pengembalian' => $this->input->post('resikembali')
 		);
-		$this->Data_Toolkit->update_toolkit("peminjaman", $id_peminjaman, $where);
+		$this->Data_Toolkit->update_toolkit("peminjaman",  $where, $id_peminjaman);
 		redirect('akun/toolkit_saya');
 	}
 

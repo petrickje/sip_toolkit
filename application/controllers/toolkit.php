@@ -77,6 +77,25 @@ class Toolkit extends CI_Controller
 
 		redirect('Welcome/homepage');
 	}
+	public function form_Update()
+
+	{
+		$id_toolkit = $this->uri->segment(3, 0);
+		$where1 = array(
+			'nim' => $_SESSION['nim']
+		);
+		$data['user'] = $this->User->cek_login("user", $where1)->result();
+
+
+		$setuju = array(
+			'isi_toolkit' => $this->input->post('isi_toolkit'),
+
+		);
+		$this->Data_Toolkit->toolkit_update("toolkit", $setuju, $id_toolkit);
+
+
+		redirect('admin/update_toolkit');
+	}
 	public function daftar_form_peminjaman()
 	{
 		$where = array('nim' => $_SESSION['nim']);
@@ -112,13 +131,15 @@ class Toolkit extends CI_Controller
 		redirect('toolkit/daftar_form_peminjaman');
 		# code...
 	}
-	public function penyetujuanu()
+	public function penyetujuanuu()
 	{
 		$id_peminjaman = $this->uri->segment(3, 0);
+
 		$where = array(
 			'status' => 2,
 			'resi_peminjaman' => $this->input->post('resi')
 		);
+
 		$this->Data_Toolkit->update_toolkit("peminjaman", $where, $id_peminjaman);
 		$id_toolkit = $this->input->post('id_toolkit');
 		$data = array(
@@ -126,7 +147,7 @@ class Toolkit extends CI_Controller
 
 		);
 		$this->Data_Toolkit->toolkit_update("toolkit", $data, $id_toolkit);
-		redirect('toolkit/toolkit_saya');
+		redirect('akun/toolkit_saya');
 		# code...
 	}
 	public function penolakan()
@@ -152,6 +173,7 @@ class Toolkit extends CI_Controller
 			'status' => 6,
 
 		);
+
 		$this->Data_Toolkit->update_toolkit("peminjaman", $where, $id_peminjaman);
 		$id_toolkit = $this->input->post('id_toolkit');
 		$data = array(
@@ -159,7 +181,7 @@ class Toolkit extends CI_Controller
 
 		);
 		$this->Data_Toolkit->toolkit_update("toolkit", $data, $id_toolkit);
-		redirect('toolkit/toolkit_saya');
+		redirect('akun/toolkit_saya');
 		# code...
 	}
 	public function selesai()

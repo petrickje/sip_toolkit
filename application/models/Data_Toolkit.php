@@ -48,13 +48,14 @@ class Data_Toolkit extends CI_Model
 
 	function toolkit_tersedia($table, $status)
 	{
-		$this->db->select('toolkit.id_toolkit, toolkit.isi_toolkit, user.nomor_hp, user.nama, user.alamat,toolkit.id_pemegang');
+		$this->db->select('toolkit.id_toolkit,toolkit.status, toolkit.isi_toolkit, user.nomor_hp, user.nama, user.alamat,toolkit.id_pemegang');
 		$this->db->from($table);
 		$this->db->join('user', 'user.nim = toolkit.id_pemegang', 'left');
 		$this->db->where($status);
 		$query = $this->db->get();
 		return $query;
 	}
+
 
 	function daftar_peminjaman($table, $where)
 	{
@@ -80,5 +81,22 @@ class Data_Toolkit extends CI_Model
 
 		$query = $this->db->get();
 		return $query;
+	}
+	function riwayat_peminjaman_all($table)
+	{
+		$this->db->select('peminjaman.id_peminjaman, peminjaman.id_peminjam, peminjaman.waktu_kembali,peminjaman.id_pemegang,peminjaman.waktu_pinjam,peminjaman.resi_pengembalian, peminjaman.id_toolkit, peminjaman.status,
+		user.nim, user.alamat, user.nama, user.nomor_hp, peminjaman.resi_peminjaman');
+		$this->db->from($table);
+		$this->db->join('user', 'user.nim = peminjaman.id_peminjam', 'left');
+		$this->db->order_by('peminjaman.waktu_pinjam', 'DESC');
+
+
+		$query = $this->db->get();
+		return $query;
+	}
+	function delete_toolkit($tables, $id_toolkit)
+	{
+		$this->db->where('id_toolkit', $id_toolkit);
+		$this->db->delete($tables);
 	}
 }

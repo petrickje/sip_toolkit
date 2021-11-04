@@ -87,6 +87,14 @@
            </a>
          </li>
          <li class="nav-item">
+           <a href="<?php echo base_url('admin/update_toolkit'); ?>" class="nav-link">
+             <i class="fas fa-archive"></i>
+             <p>
+               Pengeturan Toolkit
+             </p>
+           </a>
+         </li>
+         <li class="nav-item">
            <a href="<?php echo base_url('akun/update_admin'); ?>" class="nav-link">
              <i class="fas fa-user-cog"></i>
 
