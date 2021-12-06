@@ -89,7 +89,7 @@
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>NIM</th>
+                      <th>ID</th>
                       <th>Nama</th>
                       <th>Alamat</th>
                       <th>No. Handphone</th>

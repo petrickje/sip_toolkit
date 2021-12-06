@@ -164,7 +164,7 @@
                   <thead>
                     <tr>
                       <th>ID Toolkit</th>
-                      <th>NIM</th>
+                      <th>ID</th>
                       <th>Nama Peminjam</th>
                       <th>Waktu Pinjam</th>
                       <th>Alamat Peminjam</th>
@@ -271,7 +271,7 @@
                   <thead>
                     <tr>
                       <th>ID Toolkit</th>
-                      <th>NIM</th>
+                      <th>ID</th>
                       <th>Nama</th>
                       <th>Waktu Pinjam</th>
                       <th>Alamat</th>
