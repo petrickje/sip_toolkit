@@ -193,12 +193,13 @@ class Toolkit extends CI_Controller
 			'status' => 5
 		);
 		$this->Data_Toolkit->update_toolkit("peminjaman", $where, $id_peminjaman);
-		$id_toolkit = $this->uri->segment(3, 0);
+		$id_toolkit = $this->input->post('id_toolkit');
 		$setuju = array(
 			'status' => '1',
 			'id_pemegang' => $_SESSION['nim'],
 
 		);
+
 		$this->Data_Toolkit->toolkit_update("toolkit", $setuju, $id_toolkit);
 		redirect('toolkit/daftar_form_peminjaman');
 		# code...

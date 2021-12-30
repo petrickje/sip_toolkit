@@ -38,7 +38,9 @@ class Login extends CI_Controller
                 redirect('Welcome/homepage');
             }
         } else {
-            echo "Username dan password salah !";
+            // echo "Username dan password salah !";
+            $this->session->set_flashdata('message', 'Login Failed!');
+            redirect('Welcome/login');
         }
     }
 

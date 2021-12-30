@@ -37,6 +37,14 @@
 						Login Sistem Informasi Peminjaman Toolkit
 					</span>
 
+					<?php if ($this->session->flashdata('message')) { ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong><?php echo $this->session->flashdata('message'); ?></strong>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+						</div>
+					<?php } ?>
+
 					<div class="wrap-input100 validate-input" data-validate="nim">
 						<input class="input100" type="text" name="nim" placeholder="ID">
 						<span class="focus-input100"></span>
