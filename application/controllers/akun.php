@@ -9,7 +9,7 @@ class Akun extends CI_Controller
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('User');
-		$this->load->model('update_akun');
+		$this->load->model('Update_Akun');
 		$this->load->model('Data_Toolkit');
 	}
 
@@ -40,7 +40,25 @@ class Akun extends CI_Controller
 		$this->load->view('kelola_akun_admin', $data);
 		$this->load->view('admin/footer');
 	}
+	public function update_akun()
+	{
+		$nim = $this->uri->segment(3, 0);
+		$where = array('nim' => $_SESSION['nim']);
+		$where_user = array(
+			'nim' => $this->input->post('nim'),
+			'nama' => $this->input->post('nama'),
+			'alamat' => $this->input->post('alamat'),
+			'nomor_hp' => $this->input->post('nomor_hp'),
 
+		);
+		$this->Update_Akun->update_user('user', $where_user, $nim);
+		if ($this->input->post('password')) {
+			$where_user['password'] = md5($this->input->post('password'));
+			$this->Update_Akun->update_user('user', $where_user, $nim);
+			$data['user'] = $this->User->cek_login("user", $where)->result();
+		}
+		redirect('/akun/update');
+	}
 	public function toolkit_saya()
 	{
 		$nim = $_SESSION['nim'];

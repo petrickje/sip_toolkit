@@ -65,6 +65,7 @@ class Admin extends CI_Controller
 		$this->load->view('kelola_akun_admin', $data);
 		$this->load->view('admin/footer');
 	}
+
 	public function edit_toolkit()
 	{
 

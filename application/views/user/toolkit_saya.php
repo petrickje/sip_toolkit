@@ -310,6 +310,7 @@
                                 <form action="<?php echo base_url('akun/diselesaikan/' . $row->id_peminjaman . ''); ?>" method="post">
                                   <input type="text" name="id_toolkit" class="form-control" id="id_toolkit" value="<?php echo $row->id_toolkit; ?>" hidden>
                                   <button type="submit" class="btn btn-primary"> Selesaikan </button>
+                                </form>
                               </div>
                             </div>
                           </div>
