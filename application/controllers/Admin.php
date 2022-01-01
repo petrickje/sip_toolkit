@@ -130,6 +130,19 @@ class Admin extends CI_Controller
 		$this->update_toolkit();
 		redirect('admin/update_toolkit');
 	}
+
+
+	public function setuju()
+	{
+		$nim = $this->uri->segment(3, 0);
+		$where = array(
+			'access' => 2
+		);
+		$this->Update_Akun->update_user("user", $where, $nim);
+		redirect('akun/update_admin');
+	}
+
+
 	public function riwayat_peminjaman()
 	{
 

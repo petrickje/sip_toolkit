@@ -32,10 +32,17 @@
 					<br><br><br><img src="<?php echo base_url('images/img-01.png" alt="IMG'); ?>">
 				</div>
 
-				<form class="login100-form validate-form" method="POST" action="<?php echo base_url('Login/register'); ?>">
+				<form class="login100-form validate-form" method="POST" enctype="multipart/form-data" action="<?php echo base_url('Login/register'); ?>">
 					<span class="login100-form-title">
 						Member Register
 					</span>
+					<?php if ($this->session->flashdata('xwu')) { ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong><?php echo $this->session->flashdata('xwu'); ?></strong>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+						</div>
+					<?php } ?>
 
 					<div class="wrap-input100 validate-input" data-validate="nim">
 						<input class="input100" type="text" name="nim" placeholder="NIM">
@@ -79,7 +86,7 @@
 						</span>
 					</div>
 
-					<input type="file" name="ktm" id="ktm" accept="image/png, image/jpeg, image/jpg, image/gif" size="250">
+					<input type="file" name="ktm" id="ktm" accept="image/png, image/jpeg, image/jpg, image/gif" size="500">
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">

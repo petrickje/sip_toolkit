@@ -1,6 +1,6 @@
 <?php
 
-class Data_Toolkit extends CI_Model
+class Toolkit extends CI_Model
 {
 
 
@@ -48,9 +48,9 @@ class Data_Toolkit extends CI_Model
 
 	function toolkit_tersedia($table, $status)
 	{
-		$this->db->select('toolkit.id_toolkit,toolkit.status, toolkit.isi_toolkit, user.nomor_hp, user.nama, user.alamat,toolkit.id_pemegang');
+		$this->db->select('toolkit.id,toolkit.status_toolkit, toolkit.isi_toolkit, users.nomor_hp, users.nama, users.alamat,toolkit.pemegang_id');
 		$this->db->from($table);
-		$this->db->join('user', 'user.nim = toolkit.id_pemegang', 'left');
+		$this->db->join('users', 'users.nim = toolkit.pemegang_id', 'left');
 		$this->db->where($status);
 		$query = $this->db->get();
 		return $query;
@@ -59,10 +59,10 @@ class Data_Toolkit extends CI_Model
 
 	function daftar_peminjaman($table, $where)
 	{
-		$this->db->select('peminjaman.id_peminjaman, peminjaman.id_peminjam, peminjaman.waktu_pinjam, peminjaman.id_toolkit, peminjaman.status,
-		user.nim, user.alamat, user.nama, user.nomor_hp, peminjaman.resi_peminjaman');
+		$this->db->select('peminjaman.id, peminjaman.id_peminjam, peminjaman.waktu_pinjam, peminjaman.toolkit_id, peminjaman.status,
+		users.nim, users.alamat, users.nama, users.nomor_hp, peminjaman.resi_peminjaman');
 		$this->db->from($table);
-		$this->db->join('user', 'user.nim = peminjaman.id_peminjam', 'left');
+		$this->db->join('users', 'users.nim = peminjaman.id_peminjam', 'left');
 		$this->db->where($where);
 		$this->db->order_by('peminjaman.waktu_pinjam', 'DESC');
 

@@ -5,7 +5,7 @@ class Login extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('User');
+        $this->load->model('Users');
     }
 
 
@@ -17,29 +17,35 @@ class Login extends CI_Controller
             'nim' => $nim,
             'password' => md5($password)
         );
-        $data['user'] = $this->User->cek_login("user", $where)->result();
+        $data['users'] = $this->Users->cek_login("users", $where)->result();
 
-        if ($data['user']) {
+        if ($data['users']) {
 
-            foreach ($data['user'] as $row) {
-                $access = $row->access;
+            foreach ($data['users'] as $row) {
+                $approval = $row->approval;
             }
-
-            $data_session = array(
-                'nim' => $nim,
-
-            );
-
-            $this->session->set_userdata($data_session);
-
-            if ($access == "1") {
-                redirect('Welcome/admin');
+            if ($approval == "0") {
+                $this->session->set_flashdata('message', 'Akun anda belum di approve!');
+                redirect('Welcome/login');
             } else {
-                redirect('Welcome/homepage');
+
+
+                $data_session = array(
+                    'nim' => $nim,
+
+                );
+
+                $this->session->set_userdata($data_session);
+
+                if ($access == "1") {
+                    redirect('Welcome/admin');
+                } else {
+                    redirect('Welcome/homepage');
+                }
             }
         } else {
             // echo "Username dan password salah !";
-            $this->session->set_flashdata('message', 'Login Failed!');
+            $this->session->set_flashdata('message', 'Login Failed! ');
             redirect('Welcome/login');
         }
     }
@@ -80,28 +86,39 @@ class Login extends CI_Controller
         $config['allowed_types']        = 'gif|jpg|jpeg|png';
         $config['file_name']            = $file_name;
         $config['overwrite']            = true;
-        $config['max_size']             = 250; // 250KB Set your maximum size here Mr.Petrick
-        $config['max_width']            = 1080; // Also
-        $config['max_height']           = 1080; // Also 
+
         // Load your library : Read the docs here https://codeigniter.com/userguide3/libraries/file_uploading.html
         $this->load->library('upload', $config);
         // uploading your file
         $this->upload->do_upload('ktm');
         // preparation for save
         $uploaded_data = $this->upload->data();
+
+        if ($uploaded_data['file_size'] > 500) {
+            $this->session->set_flashdata('xwu', 'Ukuran gambar melebih kapasitas ');
+            redirect('Welcome/register');
+        } else {
+            $data = array(
+                'nim' => $nim,
+                'password' => md5($password),
+                'nama' => $nama,
+                'nomor_hp' => $nomor_hp,
+                'alamat' => $alamat,
+                'access' => '2',
+                'approval' => '0',
+                'ktm' => $uploaded_data['file_name'],
+            );
+            // var_dump($data);
+            // die;
+
+            $this->Users->input_users("users", $data);
+            redirect(base_url('Welcome/login'));
+        }
+
         // merge into $data array to save
-        $data = array(
-            'nim' => $nim,
-            'password' => md5($password),
-            'nama' => $nama,
-            'nomor_hp' => $nomor_hp,
-            'alamat' => $alamat,
-            'access' => '2',
-            'ktm' => $uploaded_data['file_name'],
-        );
+
         // need to validate in case it will throw an error
-        $this->User->input_user("user", $data);
-        redirect(base_url());
+
 
         // incase you need to read the image, use this :
         // $images = FCPATH . '/upload/ktm/'. $data['ktm']; OR  $images = base_url('upload/ktm' . $data['ktm']);

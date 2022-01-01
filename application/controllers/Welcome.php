@@ -8,7 +8,7 @@ class Welcome extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper('url');
-		$this->load->model('User');
+		$this->load->model('Users');
 		$this->load->model('Data_Toolkit');
 	}
 
@@ -26,7 +26,7 @@ class Welcome extends CI_Controller
 	public function homepage()
 	{
 		$where_toolkit = array(
-			'toolkit.status' => '1'
+			'toolkit.status_toolkit' => '1'
 		);
 		$data['toolkit'] = $this->Data_Toolkit->toolkit_tersedia("toolkit", $where_toolkit)->result();
 		$where = array(
@@ -38,12 +38,12 @@ class Welcome extends CI_Controller
 
 
 
-		$data['user'] = $this->User->cek_login("user", $where)->result();
-		$data['user_toolkit'] = $this->User->cek_login("user", $where1)->result();
-		$this->load->view('user/header');
-		$this->load->view('user/sidebar', $data);
-		$this->load->view('user/toolkit_tersedia', $data);
-		$this->load->view('user/footer');
+		$data['users'] = $this->Users->cek_login("users", $where)->result();
+		$data['users_toolkit'] = $this->Users->cek_login("users", $where1)->result();
+		$this->load->view('users/header');
+		$this->load->view('users/sidebar', $data);
+		$this->load->view('users/toolkit_tersedia', $data);
+		$this->load->view('users/footer');
 	}
 
 	public function Admin()
@@ -55,7 +55,7 @@ class Welcome extends CI_Controller
 		);
 
 
-		$data['user'] = $this->User->cek_login("user", $where)->result();
+		$data['users'] = $this->Users->cek_login("users", $where)->result();
 
 		$this->load->view('admin/header');
 		$this->load->view('admin/sidebar', $data);

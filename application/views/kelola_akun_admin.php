@@ -93,6 +93,7 @@
                       <th>Nama</th>
                       <th>Alamat</th>
                       <th>No. Handphone</th>
+                      <th>Foto KTM</th>
                       <th class="text-center">
                         <i class="fas fa-edit"></i> /
                         <i class="fas fa-trash-alt"></i>
@@ -101,7 +102,8 @@
 
                   </thead>
                   <tbody>
-                    <?php $int_temp = 1;
+                    <?php
+                    $int_temp = 1;
                     foreach ($user_all as $row) { ?>
                       <tr>
 
@@ -110,12 +112,23 @@
                         <td><?php echo $row->nama; ?></td>
                         <td><?php echo $row->alamat; ?></td>
                         <td><?php echo $row->nomor_hp; ?></td>
+                        <td><a href="" data-toggle="modal" data-target="#detailModal"><img class="image" alt="" src="<?php echo base_url('upload/ktm/' . $row->ktm); ?>" style="width:100px;height:100px;"></a></td>
                         <td class="text-center" style="white-space:">
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $row->id_user; ?>">
-                            <i class="fas fa-edit"></i>
 
-                            Edit
-                          </button>
+                          <?php if ($row->access == 3) { ?>
+                            <a href="<?php echo base_url('admin/setuju/' . $row->nim . ''); ?>" class="btn btn-success">
+                              <i class="fas fa-edit"></i>
+
+                              Setuju
+                            </a>
+
+                          <?php } else { ?>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter<?php echo $row->id_user; ?>">
+                              <i class="fas fa-edit"></i>
+
+                              Edit
+                            </button>
+                          <?php } ?>
 
 
 
@@ -184,7 +197,7 @@
                       <div class="form-group">
 
                         <label for="inputClientCompany">NIM</label>
-                        <input type="text" name="nim" id="inputClientCompany" class="form-control" value="<?php echo $row->nim; ?>">
+                        <input type="text" name="nim" id="inputClientCompany" class="form-control" value="<?php echo $row->nim; ?>" readonly>
                       </div>
                       <div class="form-group">
                         <label for="inputClientCompany">Nama</label>
@@ -225,6 +238,27 @@
           </div>
         <?php } ?>
 
+
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Detail Gambar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="" class="image_detail img-responsive center-block" style="height:auto;width:100%;text-align:center">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Tutup</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
 
       </section>
       <!-- /.content -->
@@ -280,6 +314,19 @@
   <script src="<?php echo base_url('dist/js/demo.js'); ?>"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url('dist/js/pages/dashboard.js'); ?>"></script>
+  <script>
+    $('#detailModal').on('show.bs.modal', function(e) {
+      var _button = $(e.relatedTarget);
+      var _row = _button.parents("tr");
+      // console.log(_button, _button.parents("tr"));  
+      //var link = _row
+      var _link = _row.find(".image").attr("src");
+      $(this).find(".image_detail").attr("src", _link);
+
+
+    });
+  </script>
+
 </body>
 
 </html>

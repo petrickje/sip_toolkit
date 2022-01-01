@@ -35,6 +35,7 @@
 				<form class="login100-form validate-form" action="<?php echo base_url('Login/login'); ?>" method="post">
 					<span class="login100-form-title">
 						Login Sistem Informasi Peminjaman Toolkit
+						Teknik Komputer Universitas Diponegoro
 					</span>
 
 					<?php if ($this->session->flashdata('message')) { ?>

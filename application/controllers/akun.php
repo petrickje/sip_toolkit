@@ -8,9 +8,8 @@ class Akun extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper('url');
-		$this->load->model('User');
-		$this->load->model('Update_Akun');
-		$this->load->model('Data_Toolkit');
+		$this->load->model('Users');
+		$this->load->model('Toolkit');
 	}
 
 
@@ -20,12 +19,12 @@ class Akun extends CI_Controller
 		$where = array(
 			'nim' => $_SESSION['nim']
 		);
-		$data['user'] = $this->User->cek_login("user", $where)->result();
-		$data['user_all'] = $this->User->retrieve_user("user")->result();
-		$this->load->view('user/header');
-		$this->load->view('user/sidebar', $data);
+		$data['users'] = $this->Users->cek_login("users", $where)->result();
+		$data['users_all'] = $this->Users->retrieve_users("users")->result();
+		$this->load->view('users/header');
+		$this->load->view('users/sidebar', $data);
 		$this->load->view('kelola_akun');
-		$this->load->view('user/footer');
+		$this->load->view('users/footer');
 	}
 
 	public function update_admin()
@@ -40,7 +39,7 @@ class Akun extends CI_Controller
 		$this->load->view('kelola_akun_admin', $data);
 		$this->load->view('admin/footer');
 	}
-	public function update_akun()
+	public function updateAkun()
 	{
 		$nim = $this->uri->segment(3, 0);
 		$where = array('nim' => $_SESSION['nim']);
@@ -51,13 +50,13 @@ class Akun extends CI_Controller
 			'nomor_hp' => $this->input->post('nomor_hp'),
 
 		);
-		$this->Update_Akun->update_user('user', $where_user, $nim);
+		$this->Users->update_user('users', $where_user, $nim);
 		if ($this->input->post('password')) {
 			$where_user['password'] = md5($this->input->post('password'));
-			$this->Update_Akun->update_user('user', $where_user, $nim);
-			$data['user'] = $this->User->cek_login("user", $where)->result();
+			$this->Users->update_user('users', $where_user, $nim);
+			$data['users'] = $this->Users->cek_login("users", $where)->result();
 		}
-		redirect('/akun/update');
+		redirect('/Akun/update');
 	}
 	public function toolkit_saya()
 	{
@@ -65,12 +64,12 @@ class Akun extends CI_Controller
 		$where = array(
 			'nim' => $_SESSION['nim']
 		);
-		$data['user'] = $this->User->cek_login("user", $where)->result();
+		$data['users'] = $this->Users->cek_login("users", $where)->result();
 		$where1 = array(
 			'id_peminjam' => $_SESSION['nim']
 		);
 
-		$data['toolkit'] = $this->Data_Toolkit->daftar_peminjaman("peminjaman", $where1)->result();
+		$data['toolkit'] = $this->Toolkit->daftar_peminjaman("peminjaman", $where1)->result();
 
 
 
@@ -79,12 +78,12 @@ class Akun extends CI_Controller
 			'status ' => '1'
 		);
 
-		$data['peminjaman'] = $this->Data_Toolkit->daftar_peminjaman("peminjaman", $where2)->result();
+		$data['peminjaman'] = $this->Toolkit->daftar_peminjaman("peminjaman", $where2)->result();
 
-		$this->load->view('user/header');
-		$this->load->view('user/sidebar', $data);
-		$this->load->view('user/toolkit_saya', $data);
-		$this->load->view('user/footer');
+		$this->load->view('users/header');
+		$this->load->view('users/sidebar', $data);
+		$this->load->view('users/toolkit_saya', $data);
+		$this->load->view('users/footer');
 	}
 	public function disetujui()
 	{

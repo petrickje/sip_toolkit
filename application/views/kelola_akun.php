@@ -77,8 +77,8 @@
                   </button>
                 </div>
               </div>
-              <?php foreach ($user as $row) { ?>
-                <form action="<?php echo base_url('akun/update_akun/' . $row->nim); ?>" method="post">
+              <?php foreach ($users as $row) { ?>
+                <form action="<?php echo base_url('Akun/updateAkun/' . $row->nim); ?>" method="post">
                   <div class="card-body">
                     <div class="form-group">
 
